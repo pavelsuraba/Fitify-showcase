@@ -1,6 +1,7 @@
-import logo from './assets/logo.svg'
+import logo from '../assets/logo.svg'
+import { ExerciseList } from './components/ExerciseList'
 
-function App() {
+const App = () => {
   return (
     <div>
       <img src={logo} className="logo" alt="Vite logo" />
@@ -11,6 +12,8 @@ function App() {
         75 degrees away from your body. Do not bend your wrist. Focus on a
         proper technique, rather than heavier weight.
       </p>
+
+      <ExerciseList />
     </div>
   )
 }
