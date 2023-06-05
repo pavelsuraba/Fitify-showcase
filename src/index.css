@@ -5,6 +5,7 @@
 body {
   @apply text-sm;
   @apply text-black;
+  @apply bg-white;
   @apply font-sans;
   @apply font-normal;
   @apply antialiased;
