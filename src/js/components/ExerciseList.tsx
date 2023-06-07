@@ -49,6 +49,7 @@ export const ExerciseList = ({ data }: Props) => {
         <input
           aria-label="Search"
           type="text"
+          placeholder="Search..."
           className="px-2 pl-7 w-full rounded bg-gray-dark h-7 outline-0 border border-transparent focus:border-gray-300"
           onChange={handleSearch}
           value={query}
