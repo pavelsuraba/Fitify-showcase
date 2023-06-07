@@ -15,6 +15,9 @@ Modern utility first css framework with following benefits:
 **SWR** https://swr.vercel.app
 Data Fetching, I've never used it before but it's very intuitive and works well.
 
+**headless UI** https://headlessui.com
+Headless UI for the modal, we don't need to reinvent the wheel.
+
 ## Disclaimer
 
 We're doing multiple requests to get the data needed. I reality we would use a better endpoint design for this specific use case.
