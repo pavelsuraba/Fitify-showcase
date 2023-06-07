@@ -36,8 +36,6 @@ export const ExerciseList = ({ data }: Props) => {
       ? data.filter((exercise) => filterValue(exercise.title, query))
       : data
 
-  const hasResults = filteredData.length > 0
-
   return (
     <div className="px-4 py-5 bg-gray-light rounded-[10px]">
       <p className="text-base font-medium">
@@ -57,7 +55,7 @@ export const ExerciseList = ({ data }: Props) => {
         />
       </div>
 
-      {hasResults && (
+      {filteredData.length > 0 && (
         <ul className="mt-2 max-h-[45vh] flex flex-col overflow-auto gap-1">
           {filteredData.map((exercise) => (
             <li key={exercise.code}>
@@ -83,14 +81,7 @@ export const ExerciseList = ({ data }: Props) => {
         isVisible={Boolean(selectedExercise)}
         onClose={() => setSelectedExercise(null)}
       >
-        {selectedExercise && (
-          <ExerciseDetail
-            title={selectedExercise.title}
-            hints={selectedExercise.hints}
-            tool={selectedExercise.tool}
-            code={selectedExercise.code}
-          />
-        )}
+        {selectedExercise && <ExerciseDetail exercise={selectedExercise} />}
       </Dialog>
     </div>
   )

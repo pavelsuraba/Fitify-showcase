@@ -8,34 +8,37 @@ import {
 import { ExerciseList } from './ExerciseList'
 
 const Loading = () => <div className="text-center">Loading...</div>
+const Error = () => <div className="text-center">Failed to load</div>
 
 export const ExerciseListWithData = () => {
-  const { data, isLoading } =
+  const { data, error, isLoading } =
     useFitifyData<ExercisePacksResponse>(EXERCISE_PACKS_URL)
+
+  if (error) {
+    return <Error />
+  }
 
   if (isLoading) {
     return <Loading />
   }
 
-  if (data) {
-    const urls = data.tools.map((tool) => getExercisePackUrl(tool.code))
+  const urls = data
+    ? data.tools.map((tool) => getExercisePackUrl(tool.code))
+    : []
 
-    return <MergedExercisePacksWithData urls={urls} />
-  }
-
-  return null
+  return <MergedExercisePacksWithData urls={urls} />
 }
 
 const MergedExercisePacksWithData = ({ urls }: { urls: string[] }) => {
-  const { data, isLoading } = useFitifyExerciseListData(urls)
+  const { data, error, isLoading } = useFitifyExerciseListData(urls)
+
+  if (error) {
+    return <Error />
+  }
 
   if (isLoading) {
     return <Loading />
   }
 
-  if (data) {
-    return <ExerciseList data={data} />
-  }
-
-  return null
+  return <ExerciseList data={data} />
 }

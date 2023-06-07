@@ -3,15 +3,6 @@ import useSWR from 'swr'
 export const EXERCISE_PACKS_URL =
   'https://static.gofitify.com/exercises/manifest_v6.json'
 
-type Tool = {
-  code: string
-  exercise_count: number
-  size: number
-  version: number
-}
-
-export type ExercisePacksResponse = { tools: Tool[] }
-
 export const getExercisePackUrl = (pack: string) =>
   `https://static.gofitify.com/exercises/${pack}/exercises_${pack}_v5.json`
 
@@ -27,11 +18,14 @@ const fetcherMultiple = (urls: string[]) => {
   return Promise.all(urls.map((url) => fetcher(url)))
 }
 
-export const useFitifyData = <T>(url: string) => {
-  const response = useSWR<T>(url, fetcher)
-
-  return response
+type Tool = {
+  code: string
+  exercise_count: number
+  size: number
+  version: number
 }
+
+export type ExercisePacksResponse = { tools: Tool[] }
 
 export type ExerciseCode = string
 
@@ -60,6 +54,12 @@ export type ExerciseDictionary = Record<
 
 const swrOptions = {
   revalidateOnFocus: false,
+}
+
+export const useFitifyData = <T>(url: string) => {
+  const response = useSWR<T>(url, fetcher)
+
+  return response
 }
 
 export const useFitifyExerciseListData = (urls: string[]) => {

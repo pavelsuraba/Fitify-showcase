@@ -4,13 +4,12 @@ import data from '../utils/instructions.json'
 const instructions = data as Record<string, string>
 
 type Props = {
-  title: Exercise['title']
-  hints: Exercise['hints']
-  tool: Exercise['tool']
-  code: Exercise['code']
+  exercise: Exercise
 }
 
-export const ExerciseDetail = ({ title, hints, tool, code }: Props) => {
+export const ExerciseDetail = ({ exercise }: Props) => {
+  const { title, hints, tool, code } = exercise
+
   return (
     <div>
       <div className="min-h-[220px]">
