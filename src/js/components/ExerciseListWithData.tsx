@@ -1,9 +1,9 @@
 import {
   EXERCISE_PACKS_URL,
-  ExercisePacksResponse,
   getExercisePackUrl,
   useFitifyData,
   useFitifyExerciseListData,
+  type ExercisePacksResponse,
 } from '../utils/data'
 import { ExerciseList } from './ExerciseList'
 
