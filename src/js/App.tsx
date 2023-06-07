@@ -1,19 +1,14 @@
 import logo from '../assets/logo.svg'
-import { ExerciseList } from './components/ExerciseList'
+import { ExerciseListWithData } from './components/ExerciseListWithData'
 
 const App = () => {
   return (
-    <div>
-      <img src={logo} className="logo" alt="Vite logo" />
-      <p className="mt-2 font-medium">hello world</p>
-      <p className="mt-4 max-w-lg">
-        Align your feet right below your knees. Squeeze your shoulder blades
-        together. Lift the dumbbell in a straight trajectory. Keep elbows about
-        75 degrees away from your body. Do not bend your wrist. Focus on a
-        proper technique, rather than heavier weight.
-      </p>
+    <div className="flex flex-col items-center">
+      <img className="mt-14" src={logo} alt="Fitify logo" />
 
-      <ExerciseList />
+      <div className="mt-11 w-full max-w-[632px] px-4">
+        <ExerciseListWithData />
+      </div>
     </div>
   )
 }
