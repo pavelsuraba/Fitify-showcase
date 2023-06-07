@@ -7,12 +7,14 @@ import {
 } from '../utils/data'
 import { ExerciseList } from './ExerciseList'
 
+const Loading = () => <div className="text-center">Loading...</div>
+
 export const ExerciseListWithData = () => {
   const { data, isLoading } =
     useFitifyData<ExercisePacksResponse>(EXERCISE_PACKS_URL)
 
   if (isLoading) {
-    return <>Loading</>
+    return <Loading />
   }
 
   if (data) {
@@ -28,7 +30,7 @@ const MergedExercisePacksWithData = ({ urls }: { urls: string[] }) => {
   const { data, isLoading } = useFitifyExerciseListData(urls)
 
   if (isLoading) {
-    return <>Loading</>
+    return <Loading />
   }
 
   if (data) {

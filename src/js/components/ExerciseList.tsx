@@ -5,6 +5,7 @@ import { ExerciseListItem } from './ExerciseListItem'
 
 import pluralize from 'pluralize'
 import Highlighter from 'react-highlight-words'
+import LazyLoad from 'react-lazy-load'
 
 type Props = {
   data: Exercise[]
@@ -65,16 +66,18 @@ export const ExerciseList = ({ data }: Props) => {
       </div>
 
       {hasResults && (
-        <ul className="mt-2 h-[45vh] flex flex-col overflow-auto gap-1">
+        <ul className="mt-2 max-h-[45vh] flex flex-col overflow-auto gap-1">
           {filteredData.map(({ code, title, tool }) => (
             <li key={code}>
-              <ExerciseListItem code={code} tool={tool}>
-                <Highlighter
-                  highlightClassName="font-bold"
-                  searchWords={[query]}
-                  textToHighlight={title}
-                />
-              </ExerciseListItem>
+              <LazyLoad height={46}>
+                <ExerciseListItem code={code} tool={tool}>
+                  <Highlighter
+                    highlightClassName="font-bold"
+                    searchWords={[query]}
+                    textToHighlight={title}
+                  />
+                </ExerciseListItem>
+              </LazyLoad>
             </li>
           ))}
         </ul>
