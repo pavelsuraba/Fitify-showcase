@@ -18,6 +18,9 @@ export const getExercisePackUrl = (pack: string) =>
 export const getExerciseThumbnailUrl = (pack: string, exercise: string) =>
   `https://static.gofitify.com/exercises/${pack}/thumbnails/${exercise}.jpg`
 
+export const getExerciseVideoUrl = (pack: string, exercise: string) =>
+  `https://static.gofitify.com/exercises/${pack}/videos/${exercise}.mp4`
+
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 const fetcherMultiple = (urls: string[]) => {

@@ -1,15 +1,14 @@
 import { useState } from 'react'
-import { Exercise } from '../utils/data'
-import { filterValue } from '../utils/string'
-import { ExerciseListItem } from './ExerciseListItem'
-
 import pluralize from 'pluralize'
 import Highlighter from 'react-highlight-words'
 import LazyLoad from 'react-lazy-load'
 
-type Props = {
-  data: Exercise[]
-}
+import { Exercise } from '../utils/data'
+import { filterValue } from '../utils/string'
+import { ExerciseListItem } from './ExerciseListItem'
+
+import { Dialog } from './Dialog'
+import { ExerciseDetail } from './ExerciseDetail'
 
 const getHeadingText = (count: number) => {
   return count > 0
@@ -32,8 +31,15 @@ const SearchIcon = () => (
   </svg>
 )
 
+type Props = {
+  data: Exercise[]
+}
+
 export const ExerciseList = ({ data }: Props) => {
   const [query, setQuery] = useState('')
+  const [selectedExercise, setSelectedExercise] = useState<Exercise | null>(
+    null,
+  )
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value)
@@ -67,14 +73,18 @@ export const ExerciseList = ({ data }: Props) => {
 
       {hasResults && (
         <ul className="mt-2 max-h-[45vh] flex flex-col overflow-auto gap-1">
-          {filteredData.map(({ code, title, tool }) => (
-            <li key={code}>
+          {filteredData.map((exercise) => (
+            <li key={exercise.code}>
               <LazyLoad height={46}>
-                <ExerciseListItem code={code} tool={tool}>
+                <ExerciseListItem
+                  code={exercise.code}
+                  tool={exercise.tool}
+                  onClick={() => setSelectedExercise(exercise)}
+                >
                   <Highlighter
                     highlightClassName="font-bold"
                     searchWords={[query]}
-                    textToHighlight={title}
+                    textToHighlight={exercise.title}
                   />
                 </ExerciseListItem>
               </LazyLoad>
@@ -82,6 +92,20 @@ export const ExerciseList = ({ data }: Props) => {
           ))}
         </ul>
       )}
+
+      <Dialog
+        isVisible={Boolean(selectedExercise)}
+        onClose={() => setSelectedExercise(null)}
+      >
+        {selectedExercise && (
+          <ExerciseDetail
+            title={selectedExercise.title}
+            hints={selectedExercise.hints}
+            tool={selectedExercise.tool}
+            code={selectedExercise.code}
+          />
+        )}
+      </Dialog>
     </div>
   )
 }
